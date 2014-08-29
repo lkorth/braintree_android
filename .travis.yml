@@ -1,0 +1,15 @@
+language: android
+env:
+    global:
+    - TERM=dumb
+    matrix:
+    - EMULATOR_VERSION=android-19
+    - EMULATOR_VERSION=android-18
+    - EMULATOR_VERSION=android-17
+    - EMULATOR_VERSION=android-16
+    - EMULATOR_VERSION=android-15
+    - EMULATOR_VERSION=android-10
+    - EMULATOR_VERSION=android-8
+
+script: ./ci.sh travis
+

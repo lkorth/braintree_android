@@ -16,7 +16,7 @@ android {
 }
 
 sdkManager {
-    emulatorVersion 'android-19'
+    emulatorVersion 'android-' + (System.getenv('EMULATOR_VERSION') ?: '19')
 }
 
 dependencies {

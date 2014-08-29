@@ -1,8 +1,8 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
 
-def LOCALHOST_IP = System.properties.containsKey('LOCALHOST_IP') ? System.properties['LOCALHOST_IP'] : '"10.0.2.2"';
-def GATEWAY_PORT = System.properties.containsKey('GATEWAY_PORT') ? System.properties['GATEWAY_PORT'] : '"3000"';
+def LOCALHOST_IP = System.properties['LOCALHOST_IP'] ?: '"https://sandbox.braintreegateway.com"';
+def GATEWAY_PORT = System.properties['GATEWAY_PORT'] ?: '"443"';
 
 android {
     compileSdkVersion 19
@@ -21,7 +21,7 @@ android {
 }
 
 sdkManager {
-    emulatorVersion 'android-19'
+    emulatorVersion 'android-' + (System.getenv('EMULATOR_VERSION') ?: '19')
 }
 
 dependencies {
