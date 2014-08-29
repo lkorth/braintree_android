@@ -2,6 +2,7 @@ package com.braintreepayments.api.dropin;
 
 import android.app.Activity;
 import android.os.SystemClock;
+import android.test.FlakyTest;
 
 import com.braintreepayments.api.BraintreeApi;
 import com.braintreepayments.api.BraintreeTestUtils;
@@ -29,6 +30,7 @@ import static org.mockito.Mockito.verify;
 
 public class ClientSideValidationTest extends BraintreePaymentActivityTestCase {
 
+    @FlakyTest
     public void testMarksFieldsAsErrorWhenSubmitButtonIsClicked()
             throws ErrorWithResponse, BraintreeException {
         String clientToken = new TestClientTokenBuilder().withPayPal().build();
@@ -54,6 +56,7 @@ public class ClientSideValidationTest extends BraintreePaymentActivityTestCase {
         verify(api, never()).create((PaymentMethod.Builder) anyObject());
     }
 
+    @FlakyTest
     public void testSubmitsToServerWhenFieldsPassClientValidation()
             throws ErrorWithResponse, BraintreeException {
         String clientToken = new TestClientTokenBuilder().withPayPal().build();
@@ -73,6 +76,7 @@ public class ClientSideValidationTest extends BraintreePaymentActivityTestCase {
         verify(api, times(1)).create((PaymentMethod.Builder) anyObject());
     }
 
+    @FlakyTest
     public void testMarksCardNumberAsErrorWhenFocusChangesAndCardNumberFailsClientValidation() {
         BraintreeTestUtils.setUpActivityTest(this);
         BraintreePaymentActivity activity = getActivity();
@@ -88,6 +92,7 @@ public class ClientSideValidationTest extends BraintreePaymentActivityTestCase {
         assertTrue(cardEditText.isError());
     }
 
+    @FlakyTest
     public void testMarksExpirationAsErrorWhenFocusChangesAndExpirationFailsClientValidation() {
         BraintreeTestUtils.setUpActivityTest(this);
         BraintreePaymentActivity activity = getActivity();
@@ -102,6 +107,7 @@ public class ClientSideValidationTest extends BraintreePaymentActivityTestCase {
         assertTrue(expirationEditText.isError());
     }
 
+    @FlakyTest
     public void testMarksCvvAsErrorWhenFocusChangesAndCvvNotProperLength() {
         BraintreeTestUtils.setUpActivityTest(this);
         BraintreePaymentActivity activity = getActivity();
@@ -117,6 +123,7 @@ public class ClientSideValidationTest extends BraintreePaymentActivityTestCase {
         assertTrue(cvvEditText.isError());
     }
 
+    @FlakyTest
     public void testMarksCvvAsErrorWhenCardChangesToAmex() {
         BraintreeTestUtils.setUpActivityTest(this);
         BraintreePaymentActivity activity = getActivity();
@@ -134,6 +141,7 @@ public class ClientSideValidationTest extends BraintreePaymentActivityTestCase {
         assertTrue(cvvEditText.isError());
     }
 
+    @FlakyTest
     public void testMarksPostalCodeWhenFocusChangesAndPostalCodeBlank() {
         BraintreeTestUtils.setUpActivityTest(this);
         BraintreePaymentActivity activity = getActivity();

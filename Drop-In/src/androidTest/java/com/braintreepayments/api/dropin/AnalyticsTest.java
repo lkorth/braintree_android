@@ -1,5 +1,6 @@
 package com.braintreepayments.api.dropin;
 
+import android.test.FlakyTest;
 import android.view.KeyEvent;
 
 import com.braintreepayments.api.Braintree;
@@ -12,9 +13,9 @@ import com.braintreepayments.api.exceptions.ServerException;
 import static com.braintreepayments.api.BraintreeTestUtils.injectBraintree;
 import static com.braintreepayments.api.BraintreeTestUtils.setUpActivityTest;
 import static com.braintreepayments.api.ui.Matchers.withHint;
-import static com.braintreepayments.api.ui.WaitForActivityHelper.waitForActivity;
 import static com.braintreepayments.api.ui.ViewHelper.waitForKeyboardToClose;
 import static com.braintreepayments.api.ui.ViewHelper.waitForView;
+import static com.braintreepayments.api.ui.WaitForActivityHelper.waitForActivity;
 import static com.braintreepayments.api.utils.PaymentFormHelpers.fillInPayPal;
 import static com.braintreepayments.api.utils.PaymentFormHelpers.waitForAddPaymentFormHeader;
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView;
@@ -41,12 +42,14 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 getInstrumentation().getContext().getCacheDir().getPath());
     }
 
+    @FlakyTest
     public void testAddsEventOnSDKInitialized() {
         setupActivity();
         verify(mBraintree, times(1)).sendAnalyticsEvent("dropin.android.sdk.initialized",
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnAddCardStarted() {
         setupActivity();
         onView(withId(R.id.form_header)).check(matches(isDisplayed()));
@@ -54,6 +57,7 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnAddCardSucceeded() {
         setupActivity();
         fillInCreditCard();
@@ -63,6 +67,7 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnAddCardFailed() {
         String clientToken = new TestClientTokenBuilder().withCvvVerification().withAnalytics().build();
         mBraintree = spy(Braintree.getInstance(getInstrumentation().getContext(),
@@ -86,6 +91,7 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnAddPayPalStarted() {
         setupActivity();
         onView(withId(R.id.paypal_appswitch_button)).perform(click());
@@ -96,6 +102,7 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnAddPayPalSucceeded() {
         setupActivity();
         fillInPayPal();
@@ -104,6 +111,7 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnSDKExitWithSuccess() {
         setupActivity();
         fillInCreditCard();
@@ -113,6 +121,7 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnSDKExitWithUserCanceled() {
         setupActivity();
         sendKeys(KeyEvent.KEYCODE_BACK);
@@ -122,6 +131,7 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnSDKExitWithDeveloperError() {
         setupActivity();
         BraintreeTestUtils
@@ -132,6 +142,7 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnSDKExitWithServerError() {
         setupActivity();
         BraintreeTestUtils.postUnrecoverableErrorFromBraintree(mBraintree, new ServerException());
@@ -141,6 +152,7 @@ public class AnalyticsTest extends BraintreePaymentActivityTestCase {
                 BraintreePaymentActivity.INTEGRATION_METHOD);
     }
 
+    @FlakyTest
     public void testAddsEventOnSDKExitWithServerUnavailableError() {
         setupActivity();
         BraintreeTestUtils

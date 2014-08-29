@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.SystemClock;
+import android.test.FlakyTest;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -73,6 +74,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
                 .expirationYear("2019")).getNonce();
     }
 
+    @FlakyTest
     public void testDisplaysALoadingViewWhileGettingPaymentMethods() {
         String clientToken = new TestClientTokenBuilder().withPayPal().build();
         injectSlowBraintree(getInstrumentation().getContext(), clientToken, 4000);
@@ -82,6 +84,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         assertEquals(View.VISIBLE, activity.findViewById(R.id.loading_spinner).getVisibility());
     }
 
+    @FlakyTest
     public void testLoadingPaymentMethodsTimesOutAfterTenSecondsAndDropsToAddPaymentMethodForm() {
         String clientToken = new TestClientTokenBuilder().withPayPal().build();
         injectSlowBraintree(getInstrumentation().getContext(), clientToken, 11000);
@@ -91,6 +94,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         waitForAddPaymentFormHeader(10500).check(matches(isDisplayed()));
     }
 
+    @FlakyTest
     public void testFallsBackToAddPaymentMethodFormIfLoadingPaymentMethodsBlowsUp()
             throws UnexpectedException {
         String clientToken = new TestClientTokenBuilder().withPayPal().build();
@@ -109,6 +113,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         assertTrue(elapsedTestTime < 5000);
     }
 
+    @FlakyTest
     public void testDisplaysACard() {
         getActivity();
 
@@ -126,6 +131,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         assertTrue(expected.sameAs(actual));
     }
 
+    @FlakyTest
     public void testDisplaysAddPaymentMethodIfOnlyOnePaymentMethodIsAvailable() {
         getActivity();
 
@@ -135,6 +141,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
                 matches(withText(R.string.add_payment_method)));
     }
 
+    @FlakyTest
     public void testDisplaysChangePaymentMethodIfMoreThanOnePaymentMethodIsAvailable()
             throws IOException, ErrorWithResponse {
         createAmex();
@@ -145,6 +152,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.change_payment_method_link)).check(matches(withText(R.string.change_payment_method)));
     }
 
+    @FlakyTest
     public void testNoopsWhenClickingPaymentMethodAndOnlyOneExists() {
         getActivity();
 
@@ -160,6 +168,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         }
     }
 
+    @FlakyTest
     public void testSkipsPaymentMethodListWhenClickingAddPaymentMethodLink() {
         getActivity();
 
@@ -170,6 +179,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.card_form_card_number)).check(matches(isDisplayed()));
     }
 
+    @FlakyTest
     public void testDisplaysCorrectActivePaymentMethod() throws IOException, ErrorWithResponse {
         createAmex();
         getActivity();
@@ -188,6 +198,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         assertTrue(expected.sameAs(actual));
     }
 
+    @FlakyTest
     public void testChangePaymentMethodShowsChooserDialog() throws IOException, ErrorWithResponse {
         createAmex();
         getActivity();
@@ -198,6 +209,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         onView(withText("Choose Payment Method")).check(matches(isDisplayed()));
     }
 
+    @FlakyTest
     public void testShowsAllPaymentMethodsInDialog() throws IOException, ErrorWithResponse {
         createAmex();
         SystemClock.sleep(1000);
@@ -217,6 +229,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
                 matches(allOf(hasSibling(withText("jane.doe@example.com")), isDisplayed())));
     }
 
+    @FlakyTest
     public void testSelectingFromListOfPaymentMethodsUpdatesCurrentPaymentMethod()
             throws IOException, ErrorWithResponse {
         createAmex();
@@ -232,6 +245,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         assertSelectedPaymentMethodIs(R.string.descriptor_visa);
     }
 
+    @FlakyTest
     public void testSelectingFromListSetsActivePaymentForSubmit()
             throws IOException, ErrorWithResponse {
         String nonce = createAmex();
@@ -253,6 +267,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         assertEquals(nonce, activity.getActivePaymentMethod().getNonce());
     }
 
+    @FlakyTest
     public void testSubmittingSelectedPaymentMethodReturnsItToCallingActivity()
             throws IOException, ErrorWithResponse {
         BraintreePaymentActivity activity = getActivity();
@@ -272,6 +287,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         assertEquals("11", ((Card) response).getLastTwo());
     }
 
+    @FlakyTest
     public void testAddNewPaymentMethodOpensPaymentMethodForm()
             throws IOException, ErrorWithResponse {
         createAmex();
@@ -285,6 +301,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         onAddPaymentFormHeader().check(matches(isDisplayed()));
     }
 
+    @FlakyTest
     public void testBackButtonTakesYouBackToSelectPaymentMethodViewFromAddPaymentMethodView() {
         getActivity();
 
@@ -296,6 +313,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.change_payment_method_link)).check(matches(isDisplayed()));
     }
 
+    @FlakyTest
     public void testActionBarUpTakesYouBackToSelectPaymentMethodViewFromAddPaymentMethodView() {
         BraintreePaymentActivity activity = getActivity();
 
@@ -312,6 +330,7 @@ public class ListPaymentMethodTest extends BraintreePaymentActivityTestCase {
         );
     }
 
+    @FlakyTest
     public void testSubmittingDisablesSubmitButton() throws IOException, ErrorWithResponse {
         BraintreePaymentActivity activity = getActivity();
 

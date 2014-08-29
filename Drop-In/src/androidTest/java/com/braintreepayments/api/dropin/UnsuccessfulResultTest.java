@@ -1,6 +1,7 @@
 package com.braintreepayments.api.dropin;
 
 import android.app.Activity;
+import android.test.FlakyTest;
 import android.view.KeyEvent;
 
 import com.braintreepayments.api.Braintree;
@@ -17,8 +18,8 @@ import java.util.Map;
 
 import static com.braintreepayments.api.BraintreeTestUtils.injectBraintree;
 import static com.braintreepayments.api.BraintreeTestUtils.setUpActivityTest;
-import static com.braintreepayments.api.ui.WaitForActivityHelper.waitForActivity;
 import static com.braintreepayments.api.ui.ViewHelper.waitForView;
+import static com.braintreepayments.api.ui.WaitForActivityHelper.waitForActivity;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 
 public class UnsuccessfulResultTest extends BraintreePaymentActivityTestCase {
@@ -38,6 +39,7 @@ public class UnsuccessfulResultTest extends BraintreePaymentActivityTestCase {
         waitForView(withId(R.id.form_header));
     }
 
+    @FlakyTest
     public void testReturnsDeveloperErrorOnAuthenticationException() {
         BraintreeTestUtils
                 .postUnrecoverableErrorFromBraintree(mBraintree, new AuthenticationException());
@@ -49,6 +51,7 @@ public class UnsuccessfulResultTest extends BraintreePaymentActivityTestCase {
                 result.get("resultCode"));
     }
 
+    @FlakyTest
     public void testReturnsDeveloperErrorOnAuthorizationException() {
         BraintreeTestUtils
                 .postUnrecoverableErrorFromBraintree(mBraintree, new AuthorizationException());
@@ -60,6 +63,7 @@ public class UnsuccessfulResultTest extends BraintreePaymentActivityTestCase {
                 result.get("resultCode"));
     }
 
+    @FlakyTest
     public void testReturnsDeveloperErrorOnUpgradeRequiredException() {
         BraintreeTestUtils
                 .postUnrecoverableErrorFromBraintree(mBraintree, new UpgradeRequiredException());
@@ -71,6 +75,7 @@ public class UnsuccessfulResultTest extends BraintreePaymentActivityTestCase {
                 result.get("resultCode"));
     }
 
+    @FlakyTest
     public void testReturnsServerErrorOnServerException() {
         BraintreeTestUtils.postUnrecoverableErrorFromBraintree(mBraintree, new ServerException());
 
@@ -81,6 +86,7 @@ public class UnsuccessfulResultTest extends BraintreePaymentActivityTestCase {
                 result.get("resultCode"));
     }
 
+    @FlakyTest
     public void testReturnsServerUnavailableOnDownForMaintenanceException() {
         BraintreeTestUtils
                 .postUnrecoverableErrorFromBraintree(mBraintree, new DownForMaintenanceException());
@@ -92,6 +98,7 @@ public class UnsuccessfulResultTest extends BraintreePaymentActivityTestCase {
                 result.get("resultCode"));
     }
 
+    @FlakyTest
     public void testReturnsServerErrorOnUnexpectedException() {
         BraintreeTestUtils
                 .postUnrecoverableErrorFromBraintree(mBraintree, new UnexpectedException());
@@ -103,6 +110,7 @@ public class UnsuccessfulResultTest extends BraintreePaymentActivityTestCase {
                 result.get("resultCode"));
     }
 
+    @FlakyTest
     public void testReturnsUserCanceledOnBackButtonPress() {
         sendKeys(KeyEvent.KEYCODE_BACK);
 

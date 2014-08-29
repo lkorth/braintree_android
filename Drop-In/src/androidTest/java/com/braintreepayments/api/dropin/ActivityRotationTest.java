@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.SystemClock;
+import android.test.FlakyTest;
 
 import com.braintreepayments.api.BraintreeApi;
 import com.braintreepayments.api.BraintreeTestUtils;
@@ -60,6 +61,7 @@ public class ActivityRotationTest extends BraintreePaymentActivityTestCase {
         }
     }
 
+    @FlakyTest
     public void testAddPaymentViewIsRestoredOnRotation() {
         if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2) {
             return;
@@ -85,6 +87,7 @@ public class ActivityRotationTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.card_form_complete_button)).check(matches(isEnabled()));
     }
 
+    @FlakyTest
     public void testSelectPaymentViewIsRestoredOnRotation()
             throws InterruptedException, ErrorWithResponse, BraintreeException {
         if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2) {
@@ -118,6 +121,7 @@ public class ActivityRotationTest extends BraintreePaymentActivityTestCase {
         assertSelectedPaymentMethodIs(R.string.descriptor_visa);
     }
 
+    @FlakyTest
     public void testDoesntReloadPaymentMethodsOnRotate() {
         if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2) {
             return;
@@ -139,6 +143,7 @@ public class ActivityRotationTest extends BraintreePaymentActivityTestCase {
                 1, listPaymentMethodsCount.get());
     }
 
+    @FlakyTest
     public void testWhenRotatingDeviceWhileLoadingSendsEventToNewActivity() {
         if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2) {
             return;
@@ -154,6 +159,7 @@ public class ActivityRotationTest extends BraintreePaymentActivityTestCase {
         waitForAddPaymentFormHeader(timeout * 4);
     }
 
+    @FlakyTest
     public void testCardFieldsStillDisabledDuringSubmitOnRotation() {
         if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2) {
             return;
@@ -178,6 +184,7 @@ public class ActivityRotationTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.card_form_card_number)).check(matches(not(isEnabled())));
     }
 
+    @FlakyTest
     public void testSubmitButtonIsDisabledDuringSubmitOnRotate() {
         if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2) {
             return;
@@ -204,6 +211,7 @@ public class ActivityRotationTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.card_form_complete_button)).check(matches(not(isEnabled())));
     }
 
+    @FlakyTest
     public void testSubmittingStateIsPersistedAcrossRotations() {
         if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2) {
             return;
@@ -235,6 +243,7 @@ public class ActivityRotationTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.header_loading_spinner)).check(matches(isDisplayed()));
     }
 
+    @FlakyTest
     public void testSubmitButtonIsBlueAfterRotationIfFieldsAreValid() {
         if (VERSION.SDK_INT < VERSION_CODES.JELLY_BEAN_MR2) {
             return;

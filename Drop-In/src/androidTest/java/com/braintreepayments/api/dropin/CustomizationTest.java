@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build.VERSION_CODES;
+import android.test.FlakyTest;
 import android.widget.ImageView;
 
 import com.braintreepayments.api.BraintreeApi;
@@ -28,6 +29,7 @@ import static org.hamcrest.Matchers.endsWith;
 
 public class CustomizationTest extends BraintreePaymentActivityTestCase {
 
+    @FlakyTest
     public void testDescriptionIsNotNecessary() {
         Intent intent = createIntent();
         String clientToken = new TestClientTokenBuilder().build();
@@ -39,6 +41,7 @@ public class CustomizationTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.primary_description)).check(matches(not(isDisplayed())));
     }
 
+    @FlakyTest
     public void testSubmitButtonUsesDefaultTextIfNoCustomizationProvided() {
         Intent intent = createIntent();
         intent.putExtra(BraintreePaymentActivity.EXTRA_CLIENT_TOKEN, new TestClientTokenBuilder().build());
@@ -49,6 +52,7 @@ public class CustomizationTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.card_form_complete_button)).check(matches(withText(R.string.default_submit_button_text)));
     }
 
+    @FlakyTest
     public void testSubmitButtonUsesCustomizationForCardFormIfIncludedAsAnExtra() {
         Intent intent = createIntent();
         Customization customization = new CustomizationBuilder()
@@ -64,6 +68,7 @@ public class CustomizationTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.card_form_complete_button)).check(matches(withText("Subscribe - $19")));
     }
 
+    @FlakyTest
     public void testSubmitButtonUsesCustomizationForSelectPaymentMethodIfIncludedAsAnExtra()
             throws ErrorWithResponse, BraintreeException {
         String clientToken = new TestClientTokenBuilder().build();
@@ -86,6 +91,7 @@ public class CustomizationTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.select_payment_method_button)).check(matches(withText("Subscribe - $19")));
     }
 
+    @FlakyTest
     public void testDescriptionsAreDisplayedIfIncludedAsAnExtra() {
         Intent intent = createIntent();
         String clientToken = new TestClientTokenBuilder().build();
@@ -106,6 +112,7 @@ public class CustomizationTest extends BraintreePaymentActivityTestCase {
                 endsWith("$1,000,000,000.00"))));
     }
 
+    @FlakyTest
     public void testDefaultButtonTextIsUsedWhenCustomizationIsPresentWithoutSpecifyingButtonText() {
         Intent intent = createIntent();
         String clientToken = new TestClientTokenBuilder().build();
@@ -121,6 +128,7 @@ public class CustomizationTest extends BraintreePaymentActivityTestCase {
         onView(withId(R.id.card_form_complete_button)).check(matches(withText("Purchase - $19")));
     }
 
+    @FlakyTest
     @TargetApi(VERSION_CODES.HONEYCOMB)
     public void testActionBarTitleAndLogoAreUsedIfIncludedAsAnExtra() {
         Intent intent = createIntent();
@@ -142,6 +150,7 @@ public class CustomizationTest extends BraintreePaymentActivityTestCase {
         );
     }
 
+    @FlakyTest
     @TargetApi(VERSION_CODES.HONEYCOMB)
     public void testDefaultActionBarTitleAndLogoAreUsedWhenCustomizationIsPresentWithoutSpecifyingTitleAndLogo() {
         Intent intent = createIntent();
