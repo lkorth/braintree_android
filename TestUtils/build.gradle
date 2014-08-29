@@ -1,7 +1,7 @@
 apply plugin: 'android-sdk-manager'
 apply plugin: 'com.android.library'
 
-def LOCALHOST_IP = System.properties['LOCALHOST_IP'] ?: '"https://sandbox.braintreegateway.com"';
+def LOCALHOST_IP = System.properties['LOCALHOST_IP'] ?: '"https://gateway.qa.braintreepayments.com"';
 def GATEWAY_PORT = System.properties['GATEWAY_PORT'] ?: '"443"';
 
 android {
